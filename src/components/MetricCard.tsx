@@ -35,18 +35,19 @@ const styles = StyleSheet.create({
   label: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.label,
-    fontWeight: "700",
+    fontFamily: theme.fontFamily.bold,
     textTransform: "uppercase"
   },
   value: {
     color: theme.colors.text,
     fontSize: 28,
-    fontWeight: "800",
+    fontFamily: theme.fontFamily.bold,
     marginTop: theme.spacing.sm
   },
   note: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.small,
+    fontFamily: theme.fontFamily.regular,
     lineHeight: 18,
     marginTop: theme.spacing.xs
   }

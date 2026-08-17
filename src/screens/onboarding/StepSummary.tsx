@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   title: {
     color: theme.colors.text,
     fontSize: theme.typography.heading,
-    fontWeight: "800",
+    fontFamily: theme.fontFamily.bold,
     lineHeight: 30
   },
   row: {
@@ -85,16 +85,18 @@ const styles = StyleSheet.create({
   },
   rowLabel: {
     color: theme.colors.textMuted,
-    fontSize: theme.typography.small + 1
+    fontSize: theme.typography.small + 1,
+    fontFamily: theme.fontFamily.regular
   },
   rowValue: {
     color: theme.colors.text,
     fontSize: theme.typography.small + 1,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   rowValueEmphasis: {
     color: theme.colors.primary,
-    fontSize: theme.typography.body
+    fontSize: theme.typography.body,
+    fontFamily: theme.fontFamily.regular
   },
   divider: {
     height: 1,

@@ -33,15 +33,15 @@ const styles = StyleSheet.create({
   sign: {
     color: theme.colors.primary,
     fontSize: 24,
-    fontWeight: "800",
-    marginRight: 3
+    marginRight: 3,
+    fontFamily: theme.fontFamily.bold
   },
   input: {
     color: theme.colors.primary,
     fontSize: 30,
-    fontWeight: "800",
     minWidth: 100,
     textAlign: "center",
-    padding: 0
+    padding: 0,
+    fontFamily: theme.fontFamily.bold
   }
 });

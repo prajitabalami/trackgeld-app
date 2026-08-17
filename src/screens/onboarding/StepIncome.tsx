@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     paddingBottom: theme.spacing.xl
   },
   body: {
-    gap: theme.spacing.md
+    gap: theme.spacing.lg
   },
   copy: {
     gap: 6
@@ -91,13 +91,14 @@ const styles = StyleSheet.create({
   title: {
     color: theme.colors.text,
     fontSize: theme.typography.heading - 4,
-    fontWeight: "800",
-    lineHeight: 26
+    lineHeight: 26,
+    fontFamily: theme.fontFamily.bold
   },
   subtitle: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.small + 1,
-    lineHeight: 20
+    lineHeight: 20,
+    fontFamily: theme.fontFamily.regular
   },
   amountCard: {
     alignItems: "center",
@@ -110,25 +111,26 @@ const styles = StyleSheet.create({
   currencySign: {
     color: theme.colors.primary,
     fontSize: 28,
-    fontWeight: "800",
-    marginRight: 4
+    marginRight: 4,
+    fontFamily: theme.fontFamily.bold
   },
   amountInput: {
     color: theme.colors.primary,
     fontSize: 34,
-    fontWeight: "800",
     minWidth: 140,
-    padding: 0
+    padding: 0,
+    fontFamily: theme.fontFamily.bold
   },
   amountLabel: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.label,
+    fontFamily: theme.fontFamily.regular,
     marginTop: 4
   },
   error: {
     color: theme.colors.danger,
     fontSize: theme.typography.label,
-    fontWeight: "700",
+    fontFamily: theme.fontFamily.bold,
     marginTop: -theme.spacing.sm
   }
 });

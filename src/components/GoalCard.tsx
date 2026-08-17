@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   title: {
     color: theme.colors.text,
     fontSize: theme.typography.small + 1,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   deadline: {
     color: theme.colors.textMuted,
@@ -78,11 +78,11 @@ const styles = StyleSheet.create({
   amount: {
     color: theme.colors.text,
     fontSize: theme.typography.small + 1,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   amountMuted: {
     color: theme.colors.textMuted,
-    fontWeight: "600"
+    fontFamily: theme.fontFamily.semiBold
   },
   track: {
     height: 8,
@@ -97,6 +97,6 @@ const styles = StyleSheet.create({
   note: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.label,
-    fontWeight: "700"
+    fontFamily: theme.fontFamily.bold
   }
 });

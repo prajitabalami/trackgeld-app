@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   title: {
     color: theme.colors.text,
     fontSize: 15,
-    fontWeight: "800",
+    fontFamily: theme.fontFamily.bold,
     textAlign: "center"
   }
 });

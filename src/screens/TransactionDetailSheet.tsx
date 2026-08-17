@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   amount: {
     color: theme.colors.text,
     fontSize: 20,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   amountPositive: {
     color: theme.colors.primary
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   name: {
     color: theme.colors.text,
     fontSize: 16,
-    fontWeight: "800",
+    fontFamily: theme.fontFamily.bold,
     marginTop: -4
   },
   detailCard: {
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   detailValue: {
     color: theme.colors.text,
     fontSize: theme.typography.label + 1.5,
-    fontWeight: "700"
+    fontFamily: theme.fontFamily.bold
   },
   actions: {
     flexDirection: "row",

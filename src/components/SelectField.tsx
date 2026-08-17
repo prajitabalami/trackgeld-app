@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   label: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.label,
-    fontWeight: "700",
+    fontFamily: theme.fontFamily.bold,
     textTransform: "uppercase"
   },
   field: {
@@ -54,6 +54,6 @@ const styles = StyleSheet.create({
   value: {
     color: theme.colors.text,
     fontSize: theme.typography.body,
-    fontWeight: "600"
+    fontFamily: theme.fontFamily.semiBold
   }
 });

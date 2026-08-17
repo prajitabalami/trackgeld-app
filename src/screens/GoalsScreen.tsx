@@ -80,12 +80,13 @@ const styles = StyleSheet.create({
   title: {
     color: theme.colors.text,
     fontSize: theme.typography.heading - 5,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   subtitle: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.label,
-    marginTop: 2
+    marginTop: 2,
+    fontFamily: theme.fontFamily.regular
   },
   addButton: {
     minHeight: 36,

@@ -44,20 +44,21 @@ const styles = StyleSheet.create({
   },
   sealText: {
     color: theme.colors.white,
-    fontWeight: "800",
-    fontSize: 14
+    fontSize: 14,
+    fontFamily: theme.fontFamily.bold
   },
   sealTextLg: {
     fontSize: 24
   },
   name: {
     color: theme.colors.text,
-    fontWeight: "800",
-    fontSize: 18
+    fontSize: 18,
+    fontFamily: theme.fontFamily.extraBold
   },
   tagline: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.small,
-    marginTop: 1
+    marginTop: 1,
+    fontFamily: theme.fontFamily.medium
   }
 });

@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   title: {
     color: theme.colors.text,
     fontSize: theme.typography.heading - 5,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   headerIcons: {
     flexDirection: "row",
@@ -129,12 +129,12 @@ const styles = StyleSheet.create({
   monthLabel: {
     color: theme.colors.text,
     fontSize: theme.typography.small + 1,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   groupLabel: {
     color: theme.colors.text,
     fontSize: theme.typography.label,
-    fontWeight: "800",
+    fontFamily: theme.fontFamily.bold,
     marginTop: theme.spacing.xs,
     marginBottom: 2
   },
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
   rowName: {
     color: theme.colors.text,
     fontSize: theme.typography.small,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   rowSub: {
     color: theme.colors.textMuted,
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   rowAmount: {
     color: theme.colors.text,
     fontSize: theme.typography.small,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   rowAmountPositive: {
     color: theme.colors.primary

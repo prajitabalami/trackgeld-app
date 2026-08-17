@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   label: {
     color: theme.colors.textMuted,
     fontSize: 9,
-    fontWeight: "700",
+    fontFamily: theme.fontFamily.bold,
     textAlign: "center"
   }
 });

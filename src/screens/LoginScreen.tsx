@@ -98,11 +98,12 @@ const styles = StyleSheet.create({
   title: {
     color: theme.colors.text,
     fontSize: theme.typography.heading - 2,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   copy: {
     color: theme.colors.textMuted,
-    fontSize: theme.typography.small + 1
+    fontSize: theme.typography.small + 1,
+    fontFamily: theme.fontFamily.regular
   },
   form: {
     gap: theme.spacing.md
@@ -116,7 +117,8 @@ const styles = StyleSheet.create({
   },
   forgotText: {
     color: theme.colors.textFaint,
-    fontSize: theme.typography.label
+    fontSize: theme.typography.label,
+    fontFamily: theme.fontFamily.medium
   },
   comingSoon: {
     backgroundColor: theme.colors.surfaceMuted,
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
   comingSoonText: {
     color: theme.colors.textMuted,
     fontSize: 9,
-    fontWeight: "700"
+    fontFamily: theme.fontFamily.semiBold
   },
   footer: {
     flexDirection: "row",
@@ -135,11 +137,13 @@ const styles = StyleSheet.create({
   },
   footerText: {
     color: theme.colors.textMuted,
-    fontSize: theme.typography.small
+    fontSize: theme.typography.small,
+    fontFamily: theme.fontFamily.regular
   },
   footerLink: {
     color: theme.colors.primary,
     fontSize: theme.typography.small,
-    fontWeight: "800"
+    fontWeight: "800",
+    fontFamily: theme.fontFamily.regular
   }
 });

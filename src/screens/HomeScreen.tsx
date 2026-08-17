@@ -140,12 +140,12 @@ const styles = StyleSheet.create({
   greeting: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.small,
-    fontWeight: "700"
+    fontFamily: theme.fontFamily.bold
   },
   date: {
     color: theme.colors.text,
     fontSize: theme.typography.body - 1,
-    fontWeight: "800",
+    fontFamily: theme.fontFamily.bold,
     marginTop: 2
   },
   avatar: {
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   avatarText: {
     color: theme.colors.textMuted,
-    fontWeight: "800",
+    fontFamily: theme.fontFamily.bold,
     fontSize: 12
   },
   ringCard: {
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   },
   ringCaption: {
     fontSize: theme.typography.small,
-    fontWeight: "700",
+    fontFamily: theme.fontFamily.bold,
     marginTop: theme.spacing.xs
   },
   statRow: {
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     color: theme.colors.text,
     fontSize: theme.typography.small + 1,
-    fontWeight: "800",
+    fontFamily: theme.fontFamily.bold,
     marginBottom: theme.spacing.sm
   }
 });

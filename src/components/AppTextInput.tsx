@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
   label: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.label,
-    fontWeight: "700",
-    textTransform: "uppercase"
+    textTransform: "uppercase",
+    fontFamily: theme.fontFamily.bold
   },
   input: {
     minHeight: 52,
@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
     paddingHorizontal: theme.spacing.md,
     color: theme.colors.text,
-    fontSize: theme.typography.body
+    fontSize: theme.typography.body,
+    fontFamily: theme.fontFamily.regular
   }
 });
 

@@ -48,13 +48,14 @@ const styles = StyleSheet.create({
   },
   type: {
     fontSize: 10,
-    fontWeight: "800",
+    fontFamily: theme.fontFamily.bold,
     textTransform: "uppercase",
     letterSpacing: 0.3
   },
   body: {
     color: theme.colors.text,
     fontSize: theme.typography.small,
+    fontFamily: theme.fontFamily.regular,
     lineHeight: 18,
     marginTop: 7
   }

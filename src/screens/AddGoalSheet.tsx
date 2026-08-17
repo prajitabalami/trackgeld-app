@@ -125,6 +125,6 @@ const styles = StyleSheet.create({
   affordabilityText: {
     flex: 1,
     fontSize: theme.typography.label,
-    fontWeight: "700"
+    fontFamily: theme.fontFamily.bold
   }
 });

@@ -30,10 +30,12 @@ const styles = StyleSheet.create({
     color: theme.colors.text,
     fontSize: 20,
     fontWeight: "800",
-    marginTop: theme.spacing.sm
+    marginTop: theme.spacing.sm,
+    fontFamily: theme.fontFamily.regular
   },
   tagline: {
     color: theme.colors.textMuted,
-    fontSize: theme.typography.small
+    fontSize: theme.typography.small,
+    fontFamily: theme.fontFamily.regular
   }
 });

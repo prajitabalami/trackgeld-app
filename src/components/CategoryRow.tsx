@@ -57,12 +57,12 @@ const styles = StyleSheet.create({
     flex: 1,
     color: theme.colors.text,
     fontSize: theme.typography.small,
-    fontWeight: "700"
+    fontFamily: theme.fontFamily.bold
   },
   amount: {
     color: theme.colors.text,
     fontSize: theme.typography.small,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   track: {
     height: 8,

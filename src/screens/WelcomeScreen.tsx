@@ -85,13 +85,14 @@ const styles = StyleSheet.create({
   title: {
     color: theme.colors.text,
     fontSize: theme.typography.title - 4,
-    fontWeight: "800",
+    fontFamily: theme.fontFamily.extraBold,
     lineHeight: 38
   },
   copy: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.body,
-    lineHeight: 24
+    lineHeight: 24,
+    fontFamily: theme.fontFamily.regular
   },
   actions: {
     gap: theme.spacing.sm,

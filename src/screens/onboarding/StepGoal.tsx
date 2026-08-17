@@ -105,18 +105,19 @@ const styles = StyleSheet.create({
   title: {
     color: theme.colors.text,
     fontSize: theme.typography.heading - 4,
-    fontWeight: "800",
+    fontFamily: theme.fontFamily.bold,
     lineHeight: 26
   },
   subtitle: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.small + 1,
-    lineHeight: 20
+    lineHeight: 20,
+    fontFamily: theme.fontFamily.regular
   },
   skip: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.small,
-    fontWeight: "700",
+    fontFamily: theme.fontFamily.bold,
     marginTop: 2
   },
   row: {

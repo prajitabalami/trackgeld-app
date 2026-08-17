@@ -77,12 +77,12 @@ const styles = StyleSheet.create({
   label: {
     color: theme.colors.text,
     fontSize: 21,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   subLabel: {
     color: theme.colors.textMuted,
     fontSize: 10,
-    fontWeight: "600",
+    fontFamily: theme.fontFamily.semiBold,
     marginTop: 2
   }
 });

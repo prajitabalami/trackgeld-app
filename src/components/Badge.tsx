@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 9,
-    fontWeight: "800",
+    fontFamily: theme.fontFamily.bold,
     textTransform: "uppercase",
     letterSpacing: 0.3
   }

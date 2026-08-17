@@ -114,12 +114,13 @@ const styles = StyleSheet.create({
   title: {
     color: theme.colors.text,
     fontSize: theme.typography.heading - 5,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   subtitle: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.label,
-    marginTop: 2
+    marginTop: 2,
+    fontFamily: theme.fontFamily.regular
   },
   list: {
     gap: theme.spacing.sm
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     color: theme.colors.text,
     fontSize: theme.typography.small + 1,
-    fontWeight: "800",
+    fontFamily: theme.fontFamily.bold,
     marginBottom: theme.spacing.sm
   },
   splitRow: {
@@ -150,12 +151,12 @@ const styles = StyleSheet.create({
   },
   splitValue: {
     fontSize: 14,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   splitLabel: {
     color: theme.colors.textMuted,
     fontSize: 9,
-    fontWeight: "700",
+    fontFamily: theme.fontFamily.bold,
     marginTop: 2
   },
   barStack: {

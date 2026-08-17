@@ -70,17 +70,18 @@ const styles = StyleSheet.create({
   title: {
     color: theme.colors.text,
     fontSize: theme.typography.small + 1,
-    fontWeight: "800"
+    fontFamily: theme.fontFamily.bold
   },
   badge: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.label,
-    fontWeight: "700"
+    fontFamily: theme.fontFamily.semiBold
   },
   description: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.label + 1.5,
     lineHeight: 17,
-    marginTop: 4
+    marginTop: 4,
+    fontFamily: theme.fontFamily.regular
   }
 });

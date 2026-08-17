@@ -100,6 +100,6 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: theme.typography.body,
-    fontWeight: "700"
+    fontFamily: theme.fontFamily.bold
   }
 });

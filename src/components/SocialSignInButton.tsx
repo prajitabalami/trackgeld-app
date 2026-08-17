@@ -28,7 +28,7 @@ const providerConfig: Record<
   facebook: {
     label: "Continue with Facebook",
     Icon: CircleUser,
-    color: theme.colors.facebook
+    color: theme.colors.google
   }
 };
 
@@ -83,6 +83,6 @@ const styles = StyleSheet.create({
   label: {
     color: theme.colors.text,
     fontSize: theme.typography.body,
-    fontWeight: "700"
+    fontFamily: theme.fontFamily.bold
   }
 });

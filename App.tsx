@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
 
+import { useFonts, Manrope_400Regular, Manrope_500Medium, Manrope_600SemiBold, Manrope_700Bold, Manrope_800ExtraBold } from "@expo-google-fonts/manrope";
+
+
 import { TabKey } from "./src/components/PillTabBar";
 import { mockGoals, Goal } from "./src/data/goals";
 import {
@@ -25,6 +28,7 @@ import { TransactionDetailSheet } from "./src/screens/TransactionDetailSheet";
 import { WelcomeScreen } from "./src/screens/WelcomeScreen";
 import { theme } from "./src/theme/theme";
 
+
 // Simple state-machine "router" — no navigation library involved, matching
 // the pattern the original App.tsx already used. Swap this for
 // React Navigation's native/bottom-tab stacks (see spec §18.1) once real
@@ -39,6 +43,14 @@ type Route =
   | "app";
 
 export default function App() {
+   const [fontsLoaded] = useFonts({
+    Manrope_400Regular,
+    Manrope_500Medium,
+    Manrope_600SemiBold,
+    Manrope_700Bold,
+    Manrope_800ExtraBold,
+  });
+
   const [route, setRoute] = useState<Route>("splash");
   const [name, setName] = useState("Alex");
   const [onboardingData, setOnboardingData] = useState<OnboardingData | null>(

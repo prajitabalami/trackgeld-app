@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
   label: {
     color: theme.colors.textMuted,
     fontSize: theme.typography.label,
-    fontWeight: "600"
+    fontFamily: theme.fontFamily.semiBold
   }
 });

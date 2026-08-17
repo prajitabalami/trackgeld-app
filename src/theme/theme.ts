@@ -56,6 +56,13 @@ export const theme = {
     shadowOpacity: 0.05,
     shadowRadius: 16,
     elevation: 3
+  },
+  fontFamily: {
+    regular: "Manrope_400Regular",
+    medium: "Manrope_500Medium",
+    semiBold: "Manrope_600SemiBold",
+    bold: "Manrope_700Bold",
+    extraBold: "Manrope_800ExtraBold",
   }
 } as const;
 
