@@ -1,16 +1,18 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 
 import { CategoryRow } from "../components/CategoryRow";
 import { MetricCard } from "../components/MetricCard";
 import { PillTabBar, TabKey } from "../components/PillTabBar";
 import { RingProgress } from "../components/RingProgress";
 import { theme } from "../theme/theme";
+import { LogOut } from "lucide-react-native";
 
 type HomeScreenProps = {
   name: string;
   monthlyIncome: number;
   activeTab: TabKey;
   onChangeTab: (tab: TabKey) => void;
+  onLogout: () => void;
 };
 
 // Demo data shaped like the GET /transactions/summary + GET /budget
@@ -32,11 +34,13 @@ function greeting() {
   return "Good evening";
 }
 
+
 export function HomeScreen({
   name,
   monthlyIncome,
   activeTab,
-  onChangeTab
+  onChangeTab,
+  onLogout
 }: HomeScreenProps) {
   const remaining = monthlyIncome - spend.totalSpent;
   const usedRatio = spend.budget > 0 ? spend.totalSpent / spend.budget : 0;
@@ -47,8 +51,8 @@ export function HomeScreen({
     usedRatio >= 1
       ? theme.colors.danger
       : usedRatio >= 0.8
-      ? theme.colors.warning
-      : theme.colors.primary;
+        ? theme.colors.warning
+        : theme.colors.primary;
 
   const monthLabel = new Date().toLocaleDateString("en-GB", {
     weekday: "long",
@@ -63,6 +67,13 @@ export function HomeScreen({
     .slice(0, 2)
     .toUpperCase();
 
+    function confirmLogout() {
+  Alert.alert("Log out", "Are you sure you want to log out?", [
+    { text: "Cancel", style: "cancel" },
+    { text: "Log out", style: "destructive", onPress: onLogout }
+  ]);
+}
+
   return (
     <View style={styles.wrap}>
       <ScrollView
@@ -72,12 +83,23 @@ export function HomeScreen({
         <View style={styles.header}>
           <View>
             <Text style={styles.greeting}>
-              {greeting()}, {name}
+              {greeting()}{name ? `, ${name}` : ""}
             </Text>
             <Text style={styles.date}>{monthLabel}</Text>
           </View>
-          <View style={styles.avatar}>
-            <Text style={styles.avatarText}>{initials}</Text>
+          <View style={styles.headerRight}>
+            <Pressable
+              accessibilityLabel="Log out"
+              accessibilityRole="button"
+              hitSlop={10}
+              onPress={confirmLogout}
+              style={styles.logoutButton}
+            >
+              <LogOut color={theme.colors.textMuted} size={18} />
+            </Pressable>
+            <View style={styles.avatar}>
+              <Text style={styles.avatarText}>{initials}</Text>
+            </View>
           </View>
         </View>
 
@@ -190,5 +212,16 @@ const styles = StyleSheet.create({
     fontSize: theme.typography.small + 1,
     fontFamily: theme.fontFamily.bold,
     marginBottom: theme.spacing.sm
-  }
+  },
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12
+  },
+  logoutButton: {
+    width: 34,
+    height: 34,
+    alignItems: "center",
+    justifyContent: "center"
+  },
 });

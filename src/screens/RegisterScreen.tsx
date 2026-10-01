@@ -8,10 +8,14 @@ import { Divider } from "../components/Divider";
 import { Screen } from "../components/Screen";
 import { theme } from "../theme/theme";
 
+import { loginWithEmail, signupWithEmail } from "../api/auth";
+
+
 type RegisterScreenProps = {
-  onRegister: () => void;
   onGoogleRegister: () => void;
   onGoToLogin: () => void;
+  onRegister: (firstName: string) => void;
+
 };
 
 export function RegisterScreen({
@@ -26,6 +30,9 @@ export function RegisterScreen({
   // Demo-only flag to preview the "email already exists" error state from
   // spec §3.3. Wire this up to the real POST /auth/register response.
   const [emailTaken, setEmailTaken] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const canContinue = useMemo(
     () =>
@@ -36,6 +43,40 @@ export function RegisterScreen({
     [name, email, password, confirmPassword]
   );
 
+async function handleRegister() {
+  setIsSubmitting(true);
+  setErrorMessage("");
+  setEmailTaken(false);
+
+  // 1) Create the account
+  const signup = await signupWithEmail({
+    email: email.trim(),
+    password,
+    display_name: name.trim()
+  });
+
+  if (!signup.ok) {
+    setIsSubmitting(false);
+    if (signup.status === 409) {
+      setEmailTaken(true);
+    } else {
+      setErrorMessage(signup.message);
+    }
+    return;
+  }
+
+  // 2) Log in right away so the app gets a token
+  const login = await loginWithEmail(email.trim(), password);
+  setIsSubmitting(false);
+
+  if (login.ok) {
+    onRegister(login.firstName); // -> onboarding, with the first name
+  } else {
+    setErrorMessage(
+      `Account created, but we couldn't log you in yet: ${login.message}`
+    );
+  }
+}
   return (
     <Screen centered>
       <View style={styles.stack}>
@@ -97,11 +138,11 @@ export function RegisterScreen({
             secureTextEntry
             value={confirmPassword}
           />
-
+          {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
           <AppButton
-            disabled={!canContinue}
-            onPress={onRegister}
-            title="Create account"
+            disabled={!canContinue || isSubmitting}
+            onPress={handleRegister}
+            title={isSubmitting ? "Creating account…" : "Create account"}
           />
         </View>
 

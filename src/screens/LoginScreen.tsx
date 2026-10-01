@@ -7,9 +7,11 @@ import { AppTextInput } from "../components/AppTextInput";
 import { Divider } from "../components/Divider";
 import { Screen } from "../components/Screen";
 import { theme } from "../theme/theme";
+import { loginWithEmail } from "../api/auth";
+
 
 type LoginScreenProps = {
-  onLogin: () => void;
+  onLogin: (firstName: string) => void;
   onGoogleLogin: () => void;
   onGoToRegister: () => void;
 };
@@ -21,11 +23,28 @@ export function LoginScreen({
 }: LoginScreenProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const canContinue = useMemo(
     () => email.trim().length > 3 && password.trim().length >= 4,
     [email, password]
   );
+
+  async function handleLogin() {
+    setIsSubmitting(true);
+    setErrorMessage("");
+
+    const result = await loginWithEmail(email.trim(), password);
+
+    setIsSubmitting(false);
+
+    if (result.ok) {
+      onLogin(result.firstName); // token is already saved by loginWithEmail
+    } else {
+      setErrorMessage(result.message);
+    }
+  }
 
   return (
     <Screen centered>
@@ -73,8 +92,13 @@ export function LoginScreen({
             </View>
           </View>
 
-          <AppButton disabled={!canContinue} onPress={onLogin} title="Log in" />
-        </View>
+          {errorMessage ? <Text style={styles.errorText}>{errorMessage}</Text> : null}
+
+          <AppButton
+            disabled={!canContinue || isSubmitting}
+            onPress={handleLogin}
+            title={isSubmitting ? "Logging in…" : "Log in"}
+          />        </View>
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>Don't have an account? </Text>
@@ -145,5 +169,10 @@ const styles = StyleSheet.create({
     fontSize: theme.typography.small,
     fontWeight: "800",
     fontFamily: theme.fontFamily.regular
-  }
+  },
+  errorText: {
+    color: theme.colors.danger,
+    fontSize: theme.typography.label,
+    fontFamily: theme.fontFamily.semiBold
+  },
 });
