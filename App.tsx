@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
-
-import { useFonts, Manrope_400Regular, Manrope_500Medium, Manrope_600SemiBold, Manrope_700Bold, Manrope_800ExtraBold } from "@expo-google-fonts/manrope";
+import { clearSession, loadSession } from "./src/storage/session";
 
 
 import { TabKey } from "./src/components/PillTabBar";
@@ -43,16 +42,10 @@ type Route =
   | "app";
 
 export default function App() {
-   const [fontsLoaded] = useFonts({
-    Manrope_400Regular,
-    Manrope_500Medium,
-    Manrope_600SemiBold,
-    Manrope_700Bold,
-    Manrope_800ExtraBold,
-  });
+
+  const [name, setName] = useState(""); // first name, filled in after login/signup
 
   const [route, setRoute] = useState<Route>("splash");
-  const [name, setName] = useState("Alex");
   const [onboardingData, setOnboardingData] = useState<OnboardingData | null>(
     null
   );
@@ -72,14 +65,53 @@ export default function App() {
   const [selectedTransaction, setSelectedTransaction] =
     useState<Transaction | null>(null);
 
-  // Splash swaps to Welcome after a beat — in the real app this instead
-  // awaits the SecureStore/refresh-token check from spec §3.1 and routes
-  // straight to "app" on success, or to "welcome" on failure.
-  useEffect(() => {
-    if (route !== "splash") return;
-    const timer = setTimeout(() => setRoute("welcome"), 1200);
-    return () => clearTimeout(timer);
-  }, [route]);
+// On app start: show the splash for a moment, and check the phone for a
+// saved login. Token found (and not expired) -> straight into the app.
+useEffect(() => {
+  if (route !== "splash") return;
+  let cancelled = false;
+
+  async function restoreSession() {
+    const [session] = await Promise.all([
+      loadSession(),
+      new Promise<void>((resolve) => setTimeout(resolve, 1200))
+    ]);
+    if (cancelled) return;
+
+    if (session) {
+      setName(session.firstName);
+      setRoute("app");
+    } else {
+      setRoute("welcome");
+    }
+  }
+
+  restoreSession();
+  return () => {
+    cancelled = true;
+  };
+}, [route]);
+
+function handleLogin(firstName: string) {
+  setName(firstName);
+  setActiveTab("home");
+  setRoute("app");
+}
+
+function handleRegister(firstName: string) {
+  setName(firstName);
+  setRoute("onboarding");
+}
+
+async function handleLogout() {
+  await clearSession(); // deletes the token from the phone
+  setName("");
+  setOnboardingData(null);
+  setGoals(mockGoals);
+  setTransactionGroups(mockTransactionGroups);
+  setActiveTab("home");
+  setRoute("welcome");
+}
 
   const remainingForGoals =
     (Number(onboardingData?.monthlyIncome) || 2100) -
@@ -170,7 +202,7 @@ export default function App() {
         <LoginScreen
           onGoToRegister={() => setRoute("register")}
           onGoogleLogin={() => setRoute("app")}
-          onLogin={() => setRoute("app")}
+          onLogin={handleLogin}
         />
       )}
 
@@ -178,7 +210,7 @@ export default function App() {
         <RegisterScreen
           onGoToLogin={() => setRoute("login")}
           onGoogleRegister={() => setRoute("onboarding")}
-          onRegister={() => setRoute("onboarding")}
+          onRegister={handleRegister}
         />
       )}
 
@@ -198,6 +230,7 @@ export default function App() {
           monthlyIncome={Number(onboardingData?.monthlyIncome) || 2100}
           name={name}
           onChangeTab={setActiveTab}
+          onLogout={handleLogout}
         />
       )}
 
