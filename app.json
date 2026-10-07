@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "scheme": "trackgeld",
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -15,14 +16,15 @@
       "adaptiveIcon": {
         "backgroundColor": "#F3EEE4"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.thapa.amet27.trackgeld"
     },
     "web": {
       "bundler": "metro"
     },
     "plugins": [
       "expo-font",
-      "expo-secure-store"
+      "@react-native-google-signin/google-signin"
     ]
   }
 }

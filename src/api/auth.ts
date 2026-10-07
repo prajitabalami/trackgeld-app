@@ -6,7 +6,8 @@ import {
 } from "../storage/session";
 
 // The address of your backend. Every request starts with this.
-const API_URL = "https://trackgeld-backend.fastapicloud.dev";
+// const API_URL = "https://trackgeld-backend.fastapicloud.dev";
+const API_URL = "http://10.0.2.2:8000";
 
 // ---------- Types ----------
 
@@ -112,4 +113,18 @@ export async function loginWithEmail(
 
   await saveSession(token, expiresIn, firstName); // <- the token is stored here
   return { ok: true, status: result.status, message: "", firstName };
+}
+
+export async function loginWithGoogle(credentialToken: string): Promise<AuthResult> {
+  const result = await postJson("/api/v1/auth/google", {credential: credentialToken});
+
+  if (result.ok && result.data) {
+    console.log("Google login successful:", result.data);
+    const email = result.data.user?.email;
+    const displayName = result.data.user?.display_name || "User";
+    if (email) {
+      await rememberName(email, getFirstName(displayName));
+    }
+  }
+  return { ok: result.ok, status: result.status, message: result.message };
 }

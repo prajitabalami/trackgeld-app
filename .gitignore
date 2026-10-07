@@ -10,3 +10,4 @@ yarn-error.log*
 .expo-shared/
 *.log
 .DS_Store
+android/

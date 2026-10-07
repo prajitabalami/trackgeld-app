@@ -1,5 +1,5 @@
 import { Globe } from "lucide-react-native";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { AppButton } from "../components/AppButton";
@@ -8,8 +8,9 @@ import { Divider } from "../components/Divider";
 import { Screen } from "../components/Screen";
 import { theme } from "../theme/theme";
 
-import { loginWithEmail, signupWithEmail } from "../api/auth";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
+import { loginWithEmail, signupWithEmail, loginWithGoogle } from "../api/auth";
 
 type RegisterScreenProps = {
   onGoogleRegister: () => void;
@@ -17,6 +18,9 @@ type RegisterScreenProps = {
   onRegister: (firstName: string) => void;
 
 };
+console.log("GOOGLE WEB CLIENT ID:", process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID);
+
+const CLIENT_ID = process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID;
 
 export function RegisterScreen({
   onRegister,
@@ -34,6 +38,12 @@ export function RegisterScreen({
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: CLIENT_ID,
+    });
+  }, []);
+
   const canContinue = useMemo(
     () =>
       name.trim().length >= 2 &&
@@ -43,40 +53,68 @@ export function RegisterScreen({
     [name, email, password, confirmPassword]
   );
 
-async function handleRegister() {
-  setIsSubmitting(true);
-  setErrorMessage("");
-  setEmailTaken(false);
+  async function handleGoogleRegister() {
+    setIsSubmitting(true);
+    setErrorMessage("");
 
-  // 1) Create the account
-  const signup = await signupWithEmail({
-    email: email.trim(),
-    password,
-    display_name: name.trim()
-  });
+    try {
+      await GoogleSignin.hasPlayServices();
+      const response = await GoogleSignin.signIn();
+      const idToken = response.data?.idToken;
 
-  if (!signup.ok) {
-    setIsSubmitting(false);
-    if (signup.status === 409) {
-      setEmailTaken(true);
-    } else {
-      setErrorMessage(signup.message);
+      if (!idToken) throw new Error("No ID Token returned.");
+
+      const result = await loginWithGoogle(idToken);
+      setIsSubmitting(false);
+
+      if (result.ok) {
+        onRegister(name.trim() || "User");
+      } else {
+        setErrorMessage(result.message);
+      }
+    } catch (error: any) {
+      setIsSubmitting(false);
+      if (error.code !== "SIGN_IN_CANCELLED") {
+        setErrorMessage("Google Sign-In failed.");
+      }
     }
-    return;
   }
 
-  // 2) Log in right away so the app gets a token
-  const login = await loginWithEmail(email.trim(), password);
-  setIsSubmitting(false);
 
-  if (login.ok) {
-    onRegister(login.firstName); // -> onboarding, with the first name
-  } else {
-    setErrorMessage(
-      `Account created, but we couldn't log you in yet: ${login.message}`
-    );
+  async function handleRegister() {
+    setIsSubmitting(true);
+    setErrorMessage("");
+    setEmailTaken(false);
+
+    // 1) Create the account
+    const signup = await signupWithEmail({
+      email: email.trim(),
+      password,
+      display_name: name.trim()
+    });
+
+    if (!signup.ok) {
+      setIsSubmitting(false);
+      if (signup.status === 409) {
+        setEmailTaken(true);
+      } else {
+        setErrorMessage(signup.message);
+      }
+      return;
+    }
+
+    // 2) Log in right away so the app gets a token
+    const login = await loginWithEmail(email.trim(), password);
+    setIsSubmitting(false);
+
+    if (login.ok) {
+      onRegister(login.firstName); // -> onboarding, with the first name
+    } else {
+      setErrorMessage(
+        `Account created, but we couldn't log you in yet: ${login.message}`
+      );
+    }
   }
-}
   return (
     <Screen centered>
       <View style={styles.stack}>
@@ -87,9 +125,10 @@ async function handleRegister() {
 
         <View style={styles.form}>
           <AppButton
+            disabled={isSubmitting}
             icon={<Globe color={theme.colors.google} size={16} />}
-            onPress={onGoogleRegister}
-            title="Continue with Google"
+            onPress={handleGoogleRegister}
+            title={isSubmitting ? "Connecting…" : "Continue with Google"}
             variant="secondary"
           />
 

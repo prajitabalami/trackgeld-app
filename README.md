@@ -55,3 +55,6 @@ To change the app color theme, edit `src/theme/theme.ts`. The screens and compon
 - Dummy home screen
 - Demo login path with local state only
 
+## to Remember while deploying
+- Need new console and all for PROD with new ClientId and everything
+- need to get SHA-1 and create a new OAUTH with this SHA-1
