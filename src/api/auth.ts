@@ -6,8 +6,8 @@ import {
 } from "../storage/session";
 
 // The address of your backend. Every request starts with this.
-// const API_URL = "https://trackgeld-backend.fastapicloud.dev";
-const API_URL = "http://10.0.2.2:8000";
+const API_URL = "https://trackgeld-backend.fastapicloud.dev";
+// const API_URL = "http://10.0.2.2:8000";
 
 // ---------- Types ----------
 
